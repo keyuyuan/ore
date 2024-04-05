@@ -4,7 +4,7 @@
 rpc="https://api.mainnet-beta.solana.com"
 keypair="$HOME/.config/solana/id.json" # 修改这里
 priority_fee=100
-threads=4
+threads=2
 
 # 解析命令行参数
 while [[ "$#" -gt 0 ]]; do
@@ -12,7 +12,7 @@ while [[ "$#" -gt 0 ]]; do
         -r|--rpc) rpc="$2"; shift ;;
         -k|--keypair) keypair="$2"; shift ;;
         -p|--priority-fee) priority_fee="$2"; shift ;;
-        -t|--threads) threads="$2"; shift ;;
+        -t|--threads) threads=2; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -26,4 +26,6 @@ while true; do
         --priority-fee "$priority_fee" \
         mine \
         --threads "$threads"
+    echo "Mining at full speed!!!"
+    sleep 0.5
 done
