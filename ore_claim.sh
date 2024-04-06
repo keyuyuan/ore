@@ -17,8 +17,13 @@ done
 
 # 执行 ore 命令
 while true; do
-    ore \
-        --keypair "$keypair" \
-        --rpc "$rpc" \
-        claim && echo "Claimed"
+    # 将 ore 命令的输出保存到变量中
+    output=$(ore --keypair "$keypair" --rpc "$rpc" claim)
+    echo "$output"
+    if echo "$output" | grep -q "ore"; then
+        echo "Detected 'ore' in output, sleeping for 20 minutes."
+        sleep 1200  # 20分钟为1200秒
+    else
+        echo "Claimed"
+    fi
 done
